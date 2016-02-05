@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tic Tac Toe Game</title>
+    <!--<link rel="stylesheet" href="/assets/tictactoe.css">-->
+  </head>
+
+  <body>
+    <header>
+    <h1>Tic Tac Toe Game</h1>
+    </header>
+    <main>
+      <form action="/create_game">
+        Board Dimensions:<br>
+        <% @dimensions.each do |dimension| %>
+          <input type="radio" name="dimensions" value=<%=dimension.to_s%> checked ><%=dimension.to_s%><br>
+        <%end%>
+        Game Type:<br>
+        <% @game_types.each do |type| %>
+          <% if type == :HVH %><!--This is temporarily limiting to HVH-->
+            <input type="radio" name="game_types" value=<%=type.to_s%> ><%=type.to_s%><br>
+          <%end%>
+        <%end%>
+        <input type="submit" value="Play!">
+      </form>
+    </main>
+  </body>
+</html>
