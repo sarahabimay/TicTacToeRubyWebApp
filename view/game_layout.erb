@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Tic Tac Toe Game</title>
+    <link rel="stylesheet" href="/css/tictactoe.css">
+  </head>
+  <body>
+    <header>
+    <h1> Tic Tac Toe Game: <%= game_type_description %> </h1>
+    </header>
+    <main>
+    <table>
+      <% @display.board.board_cells.each.with_index do |row, row_index| %>
+        <tr>
+          <% row.each.with_index do |cell, cell_index| %>
+            <% position = cell_index + (row_index * @board.dimension) + 1 %>
+            <% if cell.nil? then cell = position end %>
+            <td class=<%= cell %> id= <%= position %> >
+              <a class='button' href="/game/play?position=<%= position %>"><%= cell %></a>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+    </main>
+  </body>
+</html>
