@@ -18,7 +18,7 @@ class WebApp
     controller = @controller
     display = @display
     Rack::Builder.new do |env|
-      use Rack::Static, :urls  => ['/css'], :root => 'lib/assets'
+      use Rack::Static, :urls  => ['/css', '/images'], :root => 'lib/assets'
       
       map "/" do
         run(Proc.new do |env|

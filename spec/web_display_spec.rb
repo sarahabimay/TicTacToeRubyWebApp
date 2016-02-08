@@ -10,11 +10,6 @@ RSpec.describe WebDisplay do
     expect(display.board).to be_instance_of(TicTacToe::Board)
   end
 
-  it "creates winning announcement for a mark" do
-    display.winning_announcement(TicTacToe::Mark::X)
-    expect(display.results_message).to eq("Player X is the Winner!")
-  end
-
   it "confirms it has a new move" do
     display.next_player_move(1)
     expect(display.has_new_move?).to eq(true)
@@ -23,6 +18,18 @@ RSpec.describe WebDisplay do
   it "receives next user move" do
     display.next_player_move(1)
     expect(display.get_next_move).to eq(1)
+  end
+
+  it "receives winning mark" do
+    display.game_is_over=(true)
+    display.display_win(TicTacToe::Mark::X)
+    expect(display.game_is_over).to be(true)
+    expect(display.result_announcement).to eq("Player #{TicTacToe::Mark::X} is the Winner!")
+  end
+  
+  it "displays draw announcement" do
+    display.game_is_over=(true)
+    expect(display.result_announcement).to eq("Game Over! The game is a Draw!")
   end
 end
 

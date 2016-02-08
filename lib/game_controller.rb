@@ -4,7 +4,8 @@ require "web_player_factory"
 
 class GameController
   attr_reader :display, :board, :players, :game_type, :game_type_description
-
+  attr_writer :game
+  
   def initialize(player_factory)
     @player_factory = player_factory
   end
@@ -23,6 +24,18 @@ class GameController
     display.next_player_move(position)
     @game.play_turns
     @board = display.board
+    display_result
+  end
+
+  def display_result
+    if(display.board.is_game_over?)
+      display.game_is_over=(true)
+      display.display_win(game.get_winning_mark) if winning_mark_found?
+    end
+  end
+
+  def winning_mark_found?
+    TicTacToe::Mark::is_a_mark?(game.get_winning_mark)
   end
 
   def get_binding
