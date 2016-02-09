@@ -23,13 +23,13 @@ RSpec.describe WebDisplay do
   it "receives winning mark" do
     display.game_is_over=(true)
     display.display_win(TicTacToe::Mark::X)
-    expect(display.game_is_over).to be(true)
-    expect(display.result_announcement).to eq("Player #{TicTacToe::Mark::X} is the Winner!")
+    expect(display.result).to eq("Player #{TicTacToe::Mark::X} is the Winner!")
   end
   
   it "displays draw announcement" do
     display.game_is_over=(true)
-    expect(display.result_announcement).to eq("Game Over! The game is a Draw!")
+    display.display_win("")
+    expect(display.result).to eq("Game Over! The game is a Draw!")
   end
 end
 
