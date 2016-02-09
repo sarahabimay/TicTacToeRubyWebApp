@@ -24,9 +24,10 @@
           <% end %>
         </table>
       </div>
+
       <section>
         <h2 class="results">GAME RESULTS:</h2>
-        <% if @display.game_is_over then result = @display.result_announcement end %>
+        <% if @display.game_is_over then result = @display.result end %>
         <p class="announcement"><%= result %></p>
       </section>
 

@@ -10,7 +10,7 @@ RSpec.describe WebHumanPlayer do
   end
 
   it "display doesn't have a new move" do
-    expect(display).to receive(:has_new_move?).and_return(false)
+    allow(display).to receive(:has_new_move?).and_return(false)
     expect(web_human.is_ready?).to eq(false)
   end
 

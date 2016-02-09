@@ -21,11 +21,10 @@ RSpec.describe GameController do
   end
 
   it "plays a move" do
-    expect(player_factory_spy).to receive(:get_players_for_game_type).with(hvh_option).and_return(players)
+    allow(player_factory_spy).to receive(:get_players_for_game_type).and_return(players)
     game_controller = GameController.new(player_factory_spy)
     game = game_controller.create_game(dimension, hvh_option, display)
     game_controller.play_move_in_position(1)
-    expect(game_controller.game_type).to be(hvh_option)
     expect(game.board.find_mark_in_position(1)).to be(TicTacToe::Mark::X)
   end
 
@@ -33,13 +32,13 @@ RSpec.describe GameController do
     player1_spy = instance_spy(WebHumanPlayer)
     player2_spy = instance_spy(WebHumanPlayer)
     players = Hash[TicTacToe::Mark::X, player1_spy, TicTacToe::Mark::O, player2_spy]
-    expect(player1_spy).to receive(:get_next_move).and_return(1, 2, 3)
-    expect(player2_spy).to receive(:get_next_move).and_return(4, 5)
-    expect(player_factory_spy).to receive(:get_players_for_game_type).with(hvh_option).and_return(players)
+    allow(player1_spy).to receive(:get_next_move).and_return(1, 2, 3)
+    allow(player2_spy).to receive(:get_next_move).and_return(4, 5)
+    allow(player_factory_spy).to receive(:get_players_for_game_type).with(hvh_option).and_return(players)
     game_controller = GameController.new(player_factory_spy)
     game = game_controller.create_game(dimension, hvh_option, display)
     game_controller.play_move_in_position(1)
     expect(display.game_is_over).to eq(true)
-    expect(display.has_win?).to eq(true)
+    expect(display.result).to eq("Player #{TicTacToe::Mark::X} is the Winner!")
   end
 end
