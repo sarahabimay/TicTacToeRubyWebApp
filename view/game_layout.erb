@@ -6,22 +6,35 @@
   </head>
   <body>
     <header>
-    <h1> Tic Tac Toe Game: <%= game_type_description %> </h1>
+    <h1 id='game_title'> Tic Tac Toe Game: <%= game_type_description %> </h1>
     </header>
     <main>
-    <table>
-      <% @display.board.board_cells.each.with_index do |row, row_index| %>
-        <tr>
-          <% row.each.with_index do |cell, cell_index| %>
-            <% position = cell_index + (row_index * @board.dimension) + 1 %>
-            <% if cell.nil? then cell = position end %>
-            <td class=<%= cell %> id= <%= position %> >
-              <a class='button' href="/game/play?position=<%= position %>"><%= cell %></a>
-            </td>
+      <div id="board_container">
+        <table class="board">
+          <% @display.board.board_cells.each.with_index do |row, row_index| %>
+            <tr>
+              <% row.each.with_index do |cell, cell_index| %>
+                <% position = cell_index + (row_index * @board.dimension) + 1 %>
+                <% if cell.nil? then cell = position end %>
+                <td class=<%= cell %> id= <%= position %> >
+                  <a class='button' href="/game/play?position=<%= position %>"><%= cell %></a>
+                </td>
+              <% end %>
+            </tr>
           <% end %>
-        </tr>
-      <% end %>
-    </table>
+        </table>
+      </div>
+      <section>
+        <h2 class="results">GAME RESULTS:</h2>
+        <% if @display.game_is_over then result = @display.result_announcement end %>
+        <p class="announcement"><%= result %></p>
+      </section>
+
+      <footer>
+        <div id="restart_container">
+          <a class="restart" href="/">Start Again?</a>
+        </div>
+      </footer>
     </main>
   </body>
 </html>

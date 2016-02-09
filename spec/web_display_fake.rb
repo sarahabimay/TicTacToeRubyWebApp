@@ -1,4 +1,4 @@
-class WebDisplay
+class WebDisplayFake
 
   attr_reader :board, :results_message, :next_move, :result
   attr_accessor :game_is_over
